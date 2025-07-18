@@ -4,7 +4,7 @@ import New from "./components/New";
 
 export default function Home() {
   return (
- <div className="w-full h-screen m-0 font-display bg-center bg-cover bg-no-repeat bg-[url('/bg-new1.png')] flex flex-col justify-start items-center ">
+ <div className="w-full bg-[#c7cdcb] h-screen m-0 font-display bg-center bg-cover bg-no-repeat flex flex-col justify-start items-center ">
   <Header/>
   <Text style="h-[7.4%] flex items-center justify-center">
     <span>NEW ARRIVALS</span>
