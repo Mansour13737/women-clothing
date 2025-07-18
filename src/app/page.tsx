@@ -6,10 +6,16 @@ export default function Home() {
   return (
  <div className="w-full h-screen m-0 font-display bg-center bg-cover bg-no-repeat bg-[url('/bg-new1.png')] flex flex-col justify-start items-center ">
   <Header/>
-  <Text children="NEW ARRIVALS" style="h-[7.4%] flex items-center justify-center"/>
+  <Text style="h-[7.4%] flex items-center justify-center">
+    <span>NEW ARRIVALS</span>
+  </Text>
   <New/>
-  <Text children = "ABOUT US" style="text-[18px] font-bold h-[7.4%] flex items-center justify-center"/>
-  <Text children = "Discover timeless and sophisticated fashion designed to elevate your style" style="text-[12px] w-[70%] text-wrap flex items-center justify-center text-center "/>
+  <Text style="text-[18px] font-bold h-[7.4%] flex items-center justify-center">
+   <span>ABOUT US</span>
+  </Text>
+  <Text style="text-[12px] w-[70%] text-wrap flex items-center justify-center text-center ">
+    <span>Discover timeless and sophisticated fashion designed to elevate your style</span>
+  </Text>
  </div>
   );
 }
