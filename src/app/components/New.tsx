@@ -10,10 +10,10 @@ const img = [
 
 export default function New() {
   return (
-    <div className="w-full h-[25.4%] flex justify-around px-1">
+    <div className="w-full h-[23%] flex justify-around px-1">
       {img.map((item,index)=> (
-        <div key={index}>
-          <Image src ={item.src} width={700} height={1000}  alt="Pic" className="h-40 w-29 object-cover object-center" loading="lazy"/>
+        <div key={index} className="h-fit">
+          <Image src ={item.src} width={700} height={700}  alt="Pic" className="h-40 w-29 object-cover object-center" loading="lazy"/>
         </div>
       ))}
     </div>
