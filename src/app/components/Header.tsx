@@ -3,7 +3,7 @@ import Text from "./Text"
 
 export default function Header() {
   return (
-    <div className="w-full h-[42.5%]  pl-[8%] bg-[url('/bg-new1.png')] bg-no-repeat bg-cover">
+    <div className="w-full h-[42.5%]  pl-[8%] bg-[url('/bg-new1.png')] bg-no-repeat bg-cover bg-center">
       <Text  style=" tracking-wider font-semibold text-[26px] text-wrap mt-[23%] w-[35%]">
         <span>ELEGANT APPAREL</span>
       </Text>
