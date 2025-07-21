@@ -23,7 +23,7 @@ export default function ProductCard({
   colors,
 }: ProductCardProps) {
   return (
-    <div className="flex flex-col items-center text-[#262013] px-2 py-[6px] rounded-[6px] bg-[rgba(0,0,0,0.1)] w-[160px] sm:w-[160px] md:w-[180px] lg:w-[200px]">
+    <div className="flex mt-8 flex-col items-center text-[#262013] px-2 py-[6px] rounded-[6px] bg-[rgba(0,0,0,0.1)] w-[150px] sm:w-[160px] md:w-[180px] lg:w-[200px]">
       <Image
         src={imageSrc}
         width={500}
