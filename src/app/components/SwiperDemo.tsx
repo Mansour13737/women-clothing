@@ -24,7 +24,7 @@ export default function SwiperDemo() {
   };
 
   return (
-    <div className=" flex gap-2 items-center justify-end w-full mr-3 text-[9px]">
+    <div className=" flex gap-2 mt-[1.5%] items-center justify-end w-full mr-3 text-[9px]">
       <button
         onClick={handleShowCart}
         className="bg-[#262013] text-white px-2 py-1 rounded-lg font-medium hover:bg-[#262013]/80 transition-colors"

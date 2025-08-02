@@ -32,7 +32,7 @@ export default function New() {
   };
 
   return (
-    <div id="new" className="w-full h-[23%] relative bg-[#dcdddc] overflow-hidden">
+    <div id="new" className="w-full mt-[1.5%] h-[23%] relative bg-[#dcdddc]">
       <div className="flex justify-around items-center h-full px-4">
         {img.slice(currentIndex, currentIndex + 3).map((item, index) => (
           <div key={currentIndex + index} className="flex items-center justify-center">
@@ -42,7 +42,7 @@ export default function New() {
                 width={700} 
                 height={700}  
                 alt={item.title}
-                className="h-40 w-29 object-cover object-center rounded-[2px]" 
+                className="h-40 w-29 object-cover object-center rounded-[2px] shadow-xl" 
                 loading="lazy"
               />
               <div className="absolute bottom-2 left-[50%] -translate-x-[50%] bg-black bg-opacity-50 text-white px-2 py-1 text-nowrap overflow-x-clip rounded text-[8px] ">

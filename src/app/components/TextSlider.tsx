@@ -20,7 +20,7 @@ export default function TextSlider() {
   }, []);
 
   return (
-    <div className="w-full py-3 bg-black text-white flex items-center justify-center overflow-hidden relative">
+    <div className="w-full py-5 bg-black text-white flex items-center justify-center relative">
       <AnimatePresence mode="wait">
         <motion.span
           key={index}

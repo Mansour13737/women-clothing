@@ -9,7 +9,7 @@ export default function Home() {
   return (
  <div className="w-full  relative text-[#262013] bg-[#dcdddc] h-screen m-0 font-display bg-center bg-cover bg-no-repeat flex flex-col justify-start items-center ">
   <Header/>
-  <Text style="h-[6.4%] text-[18px] font-normal tracking-wider flex items-center justify-center ">
+  <Text style="h-[5%] text-[18px] font-normal tracking-wider flex items-center justify-center ">
     <span>NEW ARRIVALS</span>
   </Text>
   <TextSlider/>
@@ -20,8 +20,8 @@ export default function Home() {
   <Text style="text-[11px] w-[70%] text-wrap flex items-center font-sans leading-5 tracking-widee justify-center text-center ">
     <span>Discover timeless and sophisticated fashion designed to elevate your style</span>
   </Text>
-  <Footer/>
   <SwiperDemo/>
+  <Footer/>
  </div>
   );
 }

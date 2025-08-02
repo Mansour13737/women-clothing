@@ -62,7 +62,7 @@ export default function LoadingScreen({
         </div>
 
         {/* Loading Animation */}
-        <div className="relative w-64 h-2 bg-gray-200 rounded-full overflow-hidden mb-6">
+        <div className="relative w-64 h-2 bg-gray-200 rounded-full mb-6">
           <div 
             className="absolute top-0 left-0 h-full bg-gradient-to-r from-[#262013] to-[#4a4a4a] rounded-full transition-all duration-300 ease-out"
             style={{ width: `${loadingProgress}%` }}
