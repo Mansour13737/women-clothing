@@ -16,7 +16,7 @@ export default function Contact({ style }: Style) {
   return (
     <div className={style} style={{ color: 'inherit' }}>
       <SearchIcon className="w-4 h-4 opacity-90" />
-      
+  
       <Link 
         href="/profile" 
         className="inline-flex  items-center justify-center w-4 h-4 opacity-90 hover:opacity-100 transition-opacity duration-200"

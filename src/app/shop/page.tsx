@@ -15,17 +15,61 @@ import { ArrowUp, ChevronLeft, ChevronRight } from 'lucide-react'; // از آی�
 export default function Shop() {
   const [currentPage, setCurrentPage] = useState(1);
   const productsPerPage = 10;
-  
+
   // Sample products data - in real app this would come from API
-  const allProducts = Array.from({ length: 20 }).map((_, idx) => ({
-    id: idx + 1,
-    title: "Linen Wrap Dress",
-    price: 129,
-    oldPrice: 159,
-    rating: 4.8,
-    reviewCount: 200,
-    imageSrc: "/clothes/1.png",
-    colors: ['#f5f5f5', '#1a1a1a', '#d2b48c']
+
+  const product = [
+    { id: 1, src: "/clothes/1.jpeg", title: "Elegant Summer Dress" },
+    { id: 2, src: "/clothes/2.jpg", title: "Designer Jeans" },
+    { id: 3, src: "/clothes/3.jpg", title: "Casual Blouse" },
+    { id: 4, src: "/clothes/4.jpg", title: "Business Suit" },
+    { id: 5, src: "/clothes/5.png", title: "Evening Gown" },
+    { id: 6, src: "/clothes/6.png", title: "Casual Dress" },
+    { id: 7, src: "/clothes/7.png", title: "Casual Dress" },
+    { id: 8, src: "/clothes/8.jpg", title: "Casual Dress" },
+    { id: 9, src: "/clothes/9.jpg", title: "Casual Dress" },
+    { id: 10, src: "/clothes/10.jpg", title: "Casual Dress" },
+    { id: 11, src: "/clothes/11.jpg", title: "Casual Dress" },
+    { id: 12, src: "/clothes/12.jpg", title: "Casual Dress" },
+    { id: 13, src: "/clothes/13.jpg", title: "Casual Dress" },
+    { id: 14, src: "/clothes/14.jpg", title: "Casual Dress" },
+    { id: 15, src: "/clothes/15.jpg", title: "Casual Dress" },
+    { id: 16, src: "/clothes/16.jpg", title: "Casual Dress" },
+    { id: 17, src: "/clothes/17.jpg", title: "Casual Dress" },
+    { id: 18, src: "/clothes/18.jpg", title: "Casual Dress" },
+  ];
+
+  const uniqueTitles = [
+    "Linen Wrap Dress",
+    "Floral Maxi Dress",
+    "Denim Jacket",
+    "Chiffon Blouse",
+    "Evening Gown",
+    "Summer Skirt",
+    "Trench Coat",
+    "Pleated Dress",
+    "Striped Shirt",
+    "Oversized Sweater",
+    "Silk Top",
+    "Cotton Tee",
+    "Wrap Top",
+    "Sleeveless Dress",
+    "Leather Jacket",
+    "Mini Skirt",
+    "Tank Top",
+    "Kimono Style Dress"
+  ];
+
+  // generate allProducts from product array
+  const allProducts = product.map((item, index) => ({
+    id: item.id,
+    title: uniqueTitles[index] || `Product #${index + 1}`,
+    price: 79 + index * 2,
+    oldPrice: 99 + index * 2,
+    rating: Number((4 + (index % 2) * 0.3).toFixed(1)),
+    reviewCount: 50 + index * 10,
+    imageSrc: item.src,
+    colors: ["#f5f5f5", "#1a1a1a", "#d2b48c"]
   }));
 
   const totalPages = Math.ceil(allProducts.length / productsPerPage);
@@ -149,11 +193,10 @@ export default function Shop() {
             <button
               onClick={() => handlePageChange(currentPage - 1)}
               disabled={currentPage === 1}
-              className={`p-2 rounded-md transition ${
-                currentPage === 1
+              className={`p-2 rounded-md transition ${currentPage === 1
                   ? 'text-gray-400 cursor-not-allowed'
                   : 'text-[#262013] hover:bg-gray-100'
-              }`}
+                }`}
             >
               <ChevronLeft className="h-5 w-5" />
             </button>
@@ -163,7 +206,7 @@ export default function Shop() {
               {Array.from({ length: totalPages }, (_, idx) => {
                 const pageNumber = idx + 1;
                 // Show first page, last page, current page, and pages around current
-                const shouldShow = 
+                const shouldShow =
                   pageNumber === 1 ||
                   pageNumber === totalPages ||
                   (pageNumber >= currentPage - 1 && pageNumber <= currentPage + 1);
@@ -172,10 +215,10 @@ export default function Shop() {
                   // Show ellipsis if there's a gap
                   const prevPage = idx > 0 ? idx : null;
                   const nextPage = idx < totalPages - 1 ? idx + 2 : null;
-                  
-                  if (prevPage && nextPage && 
-                      prevPage < currentPage - 2 && 
-                      nextPage > currentPage + 2) {
+
+                  if (prevPage && nextPage &&
+                    prevPage < currentPage - 2 &&
+                    nextPage > currentPage + 2) {
                     return <span key={`ellipsis-${idx}`} className="px-2 text-gray-400">...</span>;
                   }
                   return null;
@@ -185,11 +228,10 @@ export default function Shop() {
                   <button
                     key={pageNumber}
                     onClick={() => handlePageChange(pageNumber)}
-                    className={`px-3 py-1 rounded-md text-sm font-medium transition ${
-                      currentPage === pageNumber
+                    className={`px-3 py-1 rounded-md text-sm font-medium transition ${currentPage === pageNumber
                         ? 'bg-[#262013] text-white'
                         : 'text-[#262013] hover:bg-gray-100'
-                    }`}
+                      }`}
                   >
                     {pageNumber}
                   </button>
@@ -201,11 +243,10 @@ export default function Shop() {
             <button
               onClick={() => handlePageChange(currentPage + 1)}
               disabled={currentPage === totalPages}
-              className={`p-2 rounded-md transition ${
-                currentPage === totalPages
+              className={`p-2 rounded-md transition ${currentPage === totalPages
                   ? 'text-gray-400 cursor-not-allowed'
                   : 'text-[#262013] hover:bg-gray-100'
-              }`}
+                }`}
             >
               <ChevronRight className="h-5 w-5" />
             </button>

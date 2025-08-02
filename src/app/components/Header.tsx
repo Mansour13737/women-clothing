@@ -8,7 +8,7 @@ export default function Header() {
   return (
     <div className="w-full h-[42.5%]  pl-[8%] bg-[url('/bg-new1.png')] bg-no-repeat bg-cover bg-center">
       <Address />
-      <Contact style="flex items-baseline gap-2 w-fit absolute right-3 top-5"/>
+      <Contact style="flex items-baseline gap-4 w-fit absolute right-3 top-5"/>
       <Text style=" tracking-widest font-semibold text-[26px] text-wrap mt-[23%] w-[35%]">
         <span>ELEGANT APPAREL</span>
       </Text>

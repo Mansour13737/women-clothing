@@ -4,12 +4,24 @@ import Image from "next/image";
 import { useState, useEffect } from 'react';
 
 const img = [
-  {id : 1 , src : '/clothes/1.png', title: 'Elegant Summer Dress'},
-  {id : 2 , src : '/clothes/2.png', title: 'Casual Blouse'},
-  {id : 3 , src : '/clothes/3.png', title: 'Designer Jeans'},
-  {id : 4 , src : '/clothes/1.png', title: 'Evening Gown'},
-  {id : 5 , src : '/clothes/2.png', title: 'Business Suit'},
-  {id : 6 , src : '/clothes/3.png', title: 'Casual Dress'},
+  {id : 1 , src : '/clothes/1.jpeg', title: 'Elegant Summer Dress'},
+  {id : 2 , src : '/clothes/2.jpg', title: 'Designer Jeans'},
+  {id : 3 , src : '/clothes/3.jpg', title: 'Casual Blouse'},
+  {id : 4 , src : '/clothes/4.jpg', title: 'Business Suit'},
+  {id : 5 , src : '/clothes/5.png', title: 'Evening Gown'},
+  {id : 6 , src : '/clothes/6.png', title: 'Casual Dress'},
+  {id : 7 , src : '/clothes/7.png', title: 'Casual Dress'},
+  {id : 8 , src : '/clothes/8.jpg', title: 'Casual Dress'},//
+  {id : 9 , src : '/clothes/9.jpg', title: 'Casual Dress'},
+  {id : 10 , src : '/clothes/10.jpg', title: 'Casual Dress'},
+  {id : 11 , src : '/clothes/11.jpg', title: 'Casual Dress'},
+  {id : 12 , src : '/clothes/12.jpg', title: 'Casual Dress'},
+  {id : 13 , src : '/clothes/13.jpg', title: 'Casual Dress'},
+  {id : 14 , src : '/clothes/14.jpg', title: 'Casual Dress'},
+  {id : 15 , src : '/clothes/15.jpg', title: 'Casual Dress'},
+  {id : 16 , src : '/clothes/16.jpg', title: 'Casual Dress'},
+  {id : 17 , src : '/clothes/17.jpg', title: 'Casual Dress'},
+  {id : 18 , src : '/clothes/18.jpg', title: 'Casual Dress'},
 ];
 
 export default function New() {
@@ -33,17 +45,18 @@ export default function New() {
 
   return (
     <div id="new" className="w-full mt-[1.5%] h-[23%] relative bg-[#dcdddc]">
-      <div className="flex justify-around items-center h-full px-4">
+      <div className="flex gap-1 justify-around items-center h-full px-4">
         {img.slice(currentIndex, currentIndex + 3).map((item, index) => (
           <div key={currentIndex + index} className="flex items-center justify-center">
             <div className="relative">
               <Image 
                 src={item.src} 
-                width={700} 
-                height={700}  
+                width={300} 
+                height={500}  
                 alt={item.title}
-                className="h-40 w-29 object-cover object-center rounded-[2px] shadow-xl" 
+                className=" object-cover object-center rounded-[2px] shadow-xl" 
                 loading="lazy"
+
               />
               <div className="absolute bottom-2 left-[50%] -translate-x-[50%] bg-black bg-opacity-50 text-white px-2 py-1 text-nowrap overflow-x-clip rounded text-[8px] ">
                 {item.title}

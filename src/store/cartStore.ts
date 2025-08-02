@@ -1,3 +1,5 @@
+'use client'
+
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
@@ -61,6 +63,7 @@ export const useCartStore = create<CartState>()(
                 : item
             )
           });
+          
         } else {
           set({
             items: [...items, { ...newItem, quantity: 1 }]
