@@ -35,7 +35,7 @@ export default function ProductCard({
   };
 
   return (
-    <div className="flex mt-8 font-sans flex-col items-center text-[#262013] px-2 py-[6px] rounded-[6px] bg-[rgba(0,0,0,0.1)] w-[150px] sm:w-[160px] md:w-[180px] lg:w-[200px]">
+    <div className="flex mt-2 font-sans flex-col items-center text-[#262013] px-2 py-[6px] rounded-[6px] bg-[rgba(0,0,0,0.1)] w-[150px] sm:w-[160px] md:w-[180px] lg:w-[200px]">
       <Image
         src={imageSrc}
         width={500}

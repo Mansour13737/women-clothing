@@ -16,12 +16,8 @@ export interface CartItem {
 interface CartState {
   items: CartItem[];
   isOpen: boolean;
-  
-  // Computed values
   totalItems: number;
-  totalPrice: number;
-  
-  // Actions
+
   addItem: (item: Omit<CartItem, 'quantity'>) => void;
   removeItem: (id: string) => void;
   updateQuantity: (id: string, quantity: number) => void;
@@ -29,6 +25,12 @@ interface CartState {
   toggleCart: () => void;
   openCart: () => void;
   closeCart: () => void;
+
+  getTotalPrice: () => number;
+}
+
+function calculateTotalItems(items: CartItem[]) {
+  return items.reduce((total, item) => total + item.quantity, 0);
 }
 
 export const useCartStore = create<CartState>()(
@@ -36,44 +38,41 @@ export const useCartStore = create<CartState>()(
     (set, get) => ({
       items: [],
       isOpen: false,
-
-      get totalItems() {
-        return get().items.reduce((total, item) => total + item.quantity, 0);
-      },
-
-      get totalPrice() {
-        return get().items.reduce((total, item) => total + (item.price * item.quantity), 0);
-      },
+      totalItems: 0,
 
       addItem: (newItem) => {
         const { items } = get();
-        const existingItem = items.find(item => 
-          item.id === newItem.id && 
-          item.size === newItem.size && 
+        const existingItem = items.find(item =>
+          item.id === newItem.id &&
+          item.size === newItem.size &&
           item.color === newItem.color
         );
 
+        let updatedItems: CartItem[];
+
         if (existingItem) {
-          set({
-            items: items.map(item =>
-              item.id === existingItem.id && 
-              item.size === existingItem.size && 
-              item.color === existingItem.color
-                ? { ...item, quantity: item.quantity + 1 }
-                : item
-            )
-          });
-          
+          updatedItems = items.map(item =>
+            item.id === existingItem.id &&
+            item.size === existingItem.size &&
+            item.color === existingItem.color
+              ? { ...item, quantity: item.quantity + 1 }
+              : item
+          );
         } else {
-          set({
-            items: [...items, { ...newItem, quantity: 1 }]
-          });
+          updatedItems = [...items, { ...newItem, quantity: 1 }];
         }
+
+        set({
+          items: updatedItems,
+          totalItems: calculateTotalItems(updatedItems),
+        });
       },
 
       removeItem: (id) => {
+        const updatedItems = get().items.filter(item => item.id !== id);
         set({
-          items: get().items.filter(item => item.id !== id)
+          items: updatedItems,
+          totalItems: calculateTotalItems(updatedItems),
         });
       },
 
@@ -83,15 +82,18 @@ export const useCartStore = create<CartState>()(
           return;
         }
 
+        const updatedItems = get().items.map(item =>
+          item.id === id ? { ...item, quantity } : item
+        );
+
         set({
-          items: get().items.map(item =>
-            item.id === id ? { ...item, quantity } : item
-          )
+          items: updatedItems,
+          totalItems: calculateTotalItems(updatedItems),
         });
       },
 
       clearCart: () => {
-        set({ items: [] });
+        set({ items: [], totalItems: 0 });
       },
 
       toggleCart: () => {
@@ -105,10 +107,17 @@ export const useCartStore = create<CartState>()(
       closeCart: () => {
         set({ isOpen: false });
       },
+
+      getTotalPrice: () => {
+        return get().items.reduce((total, item) => total + (item.price * item.quantity), 0);
+      },
     }),
     {
       name: 'cart-storage',
-      partialize: (state) => ({ items: state.items }),
+      partialize: (state) => ({
+        items: state.items,
+        totalItems: state.totalItems,
+      }),
     }
   )
-); 
+);

@@ -25,7 +25,7 @@ export const useCart = () => {
   return {
     items: store.items,
     totalItems: store.totalItems,
-    totalPrice: store.totalPrice,
+    totalPrice: store.getTotalPrice(),
     isOpen: store.isOpen,
     addItem: store.addItem,
     removeItem: store.removeItem,
