@@ -2,8 +2,10 @@
 
 import Image from 'next/image';
 import Btn from './Btn';
+import { useCartStore } from '../../store/cartStore';
 
 type ProductCardProps = {
+  id: string;
   title: string;
   price: number;
   oldPrice?: number;
@@ -14,16 +16,26 @@ type ProductCardProps = {
 };
 
 export default function ProductCard({
+  id,
   title,
   price,
-  oldPrice,
   rating,
   reviewCount,
   imageSrc,
-  colors,
 }: ProductCardProps) {
+  const addItem = useCartStore((state) => state.addItem);
+
+  const handleAddToCart = () => {
+    addItem({
+      id,
+      name: title,
+      price,
+      image: imageSrc,
+    });
+  };
+
   return (
-    <div className="flex mt-8 flex-col items-center text-[#262013] px-2 py-[6px] rounded-[6px] bg-[rgba(0,0,0,0.1)] w-[150px] sm:w-[160px] md:w-[180px] lg:w-[200px]">
+    <div className="flex mt-8 font-sans flex-col items-center text-[#262013] px-2 py-[6px] rounded-[6px] bg-[rgba(0,0,0,0.1)] w-[150px] sm:w-[160px] md:w-[180px] lg:w-[200px]">
       <Image
         src={imageSrc}
         width={500}
@@ -44,7 +56,10 @@ export default function ProductCard({
         </span>
       </div>
 
-      <Btn style="bg-[#262013] font-display tracking-widest w-full text-center text-white py-[6px] rounded-[6px] mt-3 text-[11px] sm:text-[12px]">
+      <Btn 
+        style="bg-[#262013] font-display tracking-widest w-full text-center text-white py-[6px] rounded-[6px] mt-3 text-[11px] sm:text-[12px]"
+        onClick={handleAddToCart}
+      >
         Add To Cart
       </Btn>
     </div>

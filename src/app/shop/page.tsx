@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 import ProductCard from '../components/ProductCard';
 import { motion } from 'framer-motion';
 import Text from '../components/Text';
@@ -8,11 +8,31 @@ import Image from 'next/image';
 import Btn from '../components/Btn';
 import Nav from '../components/Nav';
 import ProductFilter from '../components/ProductFilter';
-import Footer from '../components/Footer';
+
 import Contact from '../components/Contact';
-import { ArrowUp } from 'lucide-react'; // از آیکون‌های Lucide برای دکمه برگشت بالا
+import { ArrowUp, ChevronLeft, ChevronRight } from 'lucide-react'; // از آیکون‌های Lucide برای دکمه برگشت بالا
 
 export default function Shop() {
+  const [currentPage, setCurrentPage] = useState(1);
+  const productsPerPage = 10;
+  
+  // Sample products data - in real app this would come from API
+  const allProducts = Array.from({ length: 20 }).map((_, idx) => ({
+    id: idx + 1,
+    title: "Linen Wrap Dress",
+    price: 129,
+    oldPrice: 159,
+    rating: 4.8,
+    reviewCount: 200,
+    imageSrc: "/clothes/1.png",
+    colors: ['#f5f5f5', '#1a1a1a', '#d2b48c']
+  }));
+
+  const totalPages = Math.ceil(allProducts.length / productsPerPage);
+  const startIndex = (currentPage - 1) * productsPerPage;
+  const endIndex = startIndex + productsPerPage;
+  const currentProducts = allProducts.slice(startIndex, endIndex);
+
   const scrollToNextSection = useCallback(() => {
     window.scrollBy({
       top: window.innerHeight,
@@ -26,6 +46,15 @@ export default function Shop() {
       behavior: 'smooth',
     });
   }, []);
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    // Scroll to product grid when page changes
+    const productGrid = document.getElementById('product-grid');
+    if (productGrid) {
+      productGrid.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   return (
     <div className="w-full relative h-auto flex flex-col items-center bg-[#dcdddc]">
@@ -96,20 +125,93 @@ export default function Shop() {
       </div>
 
       {/* Product Grid */}
-      <div className="grid grid-cols-2 gap-2 p-4">
-        {Array.from({ length: 10 }).map((_, idx) => (
+      <div id="product-grid" className="grid grid-cols-2 gap-2 p-4">
+        {currentProducts.map((product) => (
           <ProductCard
-            key={idx}
-            title="Linen Wrap Dress"
-            price={129}
-            oldPrice={159}
-            rating={4.8}
-            reviewCount={200}
-            imageSrc="/clothes/1.png"
-            colors={['#f5f5f5', '#1a1a1a', '#d2b48c']}
+            key={product.id}
+            id={product.id.toString()}
+            title={product.title}
+            price={product.price}
+            oldPrice={product.oldPrice}
+            rating={product.rating}
+            reviewCount={product.reviewCount}
+            imageSrc={product.imageSrc}
+            colors={product.colors}
           />
         ))}
       </div>
+
+      {/* Pagination */}
+      {totalPages > 1 && (
+        <div className="w-full flex justify-center items-center py-8 px-4">
+          <div className="flex items-center gap-2 bg-white rounded-lg shadow-md p-2">
+            {/* Previous Button */}
+            <button
+              onClick={() => handlePageChange(currentPage - 1)}
+              disabled={currentPage === 1}
+              className={`p-2 rounded-md transition ${
+                currentPage === 1
+                  ? 'text-gray-400 cursor-not-allowed'
+                  : 'text-[#262013] hover:bg-gray-100'
+              }`}
+            >
+              <ChevronLeft className="h-5 w-5" />
+            </button>
+
+            {/* Page Numbers */}
+            <div className="flex items-center gap-1">
+              {Array.from({ length: totalPages }, (_, idx) => {
+                const pageNumber = idx + 1;
+                // Show first page, last page, current page, and pages around current
+                const shouldShow = 
+                  pageNumber === 1 ||
+                  pageNumber === totalPages ||
+                  (pageNumber >= currentPage - 1 && pageNumber <= currentPage + 1);
+
+                if (!shouldShow) {
+                  // Show ellipsis if there's a gap
+                  const prevPage = idx > 0 ? idx : null;
+                  const nextPage = idx < totalPages - 1 ? idx + 2 : null;
+                  
+                  if (prevPage && nextPage && 
+                      prevPage < currentPage - 2 && 
+                      nextPage > currentPage + 2) {
+                    return <span key={`ellipsis-${idx}`} className="px-2 text-gray-400">...</span>;
+                  }
+                  return null;
+                }
+
+                return (
+                  <button
+                    key={pageNumber}
+                    onClick={() => handlePageChange(pageNumber)}
+                    className={`px-3 py-1 rounded-md text-sm font-medium transition ${
+                      currentPage === pageNumber
+                        ? 'bg-[#262013] text-white'
+                        : 'text-[#262013] hover:bg-gray-100'
+                    }`}
+                  >
+                    {pageNumber}
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Next Button */}
+            <button
+              onClick={() => handlePageChange(currentPage + 1)}
+              disabled={currentPage === totalPages}
+              className={`p-2 rounded-md transition ${
+                currentPage === totalPages
+                  ? 'text-gray-400 cursor-not-allowed'
+                  : 'text-[#262013] hover:bg-gray-100'
+              }`}
+            >
+              <ChevronRight className="h-5 w-5" />
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* Newsletter */}
       <div className="w-full bg-[#1f1f1f] text-[#f5f5f5] px-8 py-16 text-center">

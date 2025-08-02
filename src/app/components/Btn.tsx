@@ -1,12 +1,17 @@
+
 interface Prps {
     children : React.ReactNode;
-    style : string
+    style : string;
+    onClick?: () => void;
 }
 
-
-export default function Btn({children,style} : Prps ) {
+export default function Btn({children, style, onClick} : Prps ) {
   return (
-    <div className={`${style}`}>
+    <div 
+      className={`${style}`}
+      onClick={onClick}
+      
+    >
       {children}
     </div>
   )
