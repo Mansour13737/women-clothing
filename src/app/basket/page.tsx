@@ -17,7 +17,7 @@ export default function BasketPage() {
       duration: 2000
     });
   };
-
+  
   const handleUpdateQuantity = (id: string, quantity: number) => {
     updateQuantity(id, quantity);
     addNotification({
@@ -66,7 +66,7 @@ export default function BasketPage() {
               Looks like you haven&apos;t added any items to your cart yet
             </p>
           </div>
-          
+
           <button
             onClick={() => window.history.back()}
             className="bg-[#262013] text-white px-6 py-3 rounded-lg font-medium hover:bg-[#262013]/90 transition-colors duration-200"
@@ -112,7 +112,7 @@ export default function BasketPage() {
                   Cart Items
                 </h2>
               </div>
-              
+
               <div className="divide-y divide-gray-200">
                 {items.map((item) => (
                   <div key={item.id} className="p-6">
@@ -131,14 +131,14 @@ export default function BasketPage() {
                           </div>
                         )}
                       </div>
-                      
+
                       <div className="flex-1">
                         <h3 className="font-medium text-[#262013] mb-1">{item.name}</h3>
                         <p className="text-sm text-[#262013]/60 mb-2">
                           ${item.price}
                           {item.color && ` • ${item.color}`}
                         </p>
-                        
+
                         <div className="flex items-center space-x-4">
                           <div className="flex items-center border border-gray-300 rounded-lg">
                             <button
@@ -157,7 +157,7 @@ export default function BasketPage() {
                               +
                             </button>
                           </div>
-                          
+
                           <button
                             onClick={() => handleRemoveItem(item.id)}
                             className="text-red-500 hover:text-red-600 text-sm font-medium transition-colors duration-200"
@@ -166,7 +166,7 @@ export default function BasketPage() {
                           </button>
                         </div>
                       </div>
-                      
+
                       <div className="text-right">
                         <p className="font-medium text-[#262013]">
                           ${(item.price * item.quantity).toFixed(2)}
@@ -185,7 +185,7 @@ export default function BasketPage() {
               <h2 className="text-xl font-display font-bold text-[#262013] mb-6">
                 Order Summary
               </h2>
-              
+
               <div className="space-y-4 mb-6">
                 <div className="flex justify-between">
                   <span className="text-[#262013]/70">Subtotal</span>
@@ -208,15 +208,14 @@ export default function BasketPage() {
                   </div>
                 </div>
               </div>
-              
+
               <button
                 onClick={handleCheckout}
                 disabled={isCheckingOut}
-                className={`w-full py-3 rounded-lg font-medium transition-colors duration-200 ${
-                  isCheckingOut
+                className={`w-full py-3 rounded-lg font-medium transition-colors duration-200 ${isCheckingOut
                     ? 'bg-gray-400 cursor-not-allowed'
                     : 'bg-[#262013] text-white hover:bg-[#262013]/90'
-                }`}
+                  }`}
               >
                 {isCheckingOut ? (
                   <div className="flex items-center justify-center">
@@ -230,7 +229,7 @@ export default function BasketPage() {
                   'Proceed to Checkout'
                 )}
               </button>
-              
+
               <div className="mt-4 text-center">
                 <p className="text-sm text-[#262013]/60">
                   Free shipping on orders over $50

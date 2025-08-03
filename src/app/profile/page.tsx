@@ -253,7 +253,7 @@ export default function ProfilePage() {
         {/* Navigation Tabs */}
         <div className="bg-white rounded-lg shadow-lg mb-8">
           <div className="border-b border-gray-200">
-            <nav className="flex space-x-8 px-6">
+            <nav className="flex space-x-1 px-6">
               {[
                 { id: 'profile', label: 'Profile', icon: '👤' },
                 { id: 'orders', label: 'Orders', icon: '📦' },
